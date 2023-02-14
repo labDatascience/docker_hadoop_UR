@@ -1,4 +1,5 @@
-# Imagen Docker-Hadoop cluster -
+# Imagen Docker-Hadoop Cluster
 # Laboratios BigData URosario
 
-## Requerimientos 
+
+## Requerimientos de instalación
