@@ -1,1 +1,2 @@
-# docker_hadoop_UR
+# Imagen Docker-Hadoop cluster - para los laboratios de BigData URosario
+## Requerimientos 
