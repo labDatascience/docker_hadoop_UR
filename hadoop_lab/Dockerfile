@@ -8,7 +8,7 @@ RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz
     tar -xvzf hadoop-3.3.4.tar.gz && mv hadoop-3.3.4 /opt && cd /opt && ln -s hadoop-3.3.4 hadoop && \
     rm -r /hadoop-3.3.4.tar.gz
 
-RUN mkdir -p /opt/hdfs/namenode && mkdir -p /opt/hdfs/namenode
+RUN mkdir -p /opt/hdfs/namenode && mkdir -p /opt/hdfs/datanode
 
 RUN pip3 install mrjob
 
