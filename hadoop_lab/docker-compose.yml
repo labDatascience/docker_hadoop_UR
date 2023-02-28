@@ -10,6 +10,8 @@ services:
       - ./data:/data
     command: bash -c "hdfs namenode -format;
                       hdfs namenode" 
+    storage_opt:
+        size: '3G'
 
   yarnmaster:
     build: .
@@ -20,6 +22,8 @@ services:
     links:
       - "namenode:namenode-master"
     command: yarn resourcemanager 
+    storage_opt:
+        size: '3G'
 
   datanode:
     build: .
@@ -28,6 +32,8 @@ services:
       - "yarnmaster:yarnmaster"
     command: bash -c "hdfs --daemon start datanode;
                       yarn nodemanager"
+    storage_opt:
+        size: '3G'
 
   hadoop:
     build: .
@@ -37,3 +43,5 @@ services:
       - "namenode:namenode-master"
       - "yarnmaster:yarnmaster"
     command: /bin/bash 
+    storage_opt:
+        size: '3G'
