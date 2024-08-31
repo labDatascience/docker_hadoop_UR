@@ -4,9 +4,9 @@ FROM ubuntu
 RUN apt update
 RUN apt-get install vim python3 openjdk-8-jdk  net-tools dnsutils wget python3-pip -y
 
-RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz && \
-    tar -xvzf hadoop-3.3.4.tar.gz && mv hadoop-3.3.4 /opt && cd /opt && ln -s hadoop-3.3.4 hadoop && \
-    rm -r /hadoop-3.3.4.tar.gz
+RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.4.0/hadoop-3.4.0.tar.gz && \
+    tar -xvzf hadoop-3.4.0.tar.gz && mv hadoop-3.4.0 /opt && cd /opt && ln -s hadoop-3.3.4 hadoop && \
+    rm -r /hadoop-3.4.0.tar.gz
 
 RUN mkdir -p /opt/hdfs/namenode && mkdir -p /opt/hdfs/datanode
 
