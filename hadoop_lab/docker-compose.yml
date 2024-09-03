@@ -41,5 +41,4 @@ services:
       - "namenode:namenode-master"
       - "yarnmaster:yarnmaster"
     command: /bin/bash 
-    storage_opt:
-        size: '4G'
+
