@@ -10,8 +10,6 @@ services:
       - ./data:/data
     command: bash -c "hdfs namenode -format -force;
                       hdfs namenode" 
-    storage_opt:
-        size: '3G'
     logging:
         driver: json-file
         options:
@@ -26,8 +24,6 @@ services:
     links:
       - "namenode:namenode-master"
     command: yarn resourcemanager 
-    storage_opt:
-        size: '4G'
 
   datanode:
     build: .
@@ -36,9 +32,7 @@ services:
       - "yarnmaster:yarnmaster"
     command: bash -c "hdfs --daemon start datanode;
                       yarn nodemanager"
-    storage_opt:
-        size: '4G'
-
+  
   hadoop:
     build: .
     volumes:
