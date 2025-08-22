@@ -34,10 +34,9 @@ docker image prune
 #listar las imagenes corriendo de hadoop cluster
 docker compose ps
 
-
+# para iniciar el lan 
 hadoop fs -mkdir /user
 hadoop fs -mkdir /user/root
 hadoop fs -mkdir input     
-hadoop fs -put /data/sherlock.txt      wordcountlab1.py  
 hadoop fs -put /data/sherlock.txt input
 python3 /data/wordcountlab1.py -r hadoop --output-dir out hdfs:///user/root/input 
