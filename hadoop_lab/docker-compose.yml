@@ -1,44 +1,69 @@
-services:
+version: "3"
 
+services:
+         
   namenode:
     build: .
-    hostname: namenode-master 
+    container_name: namenode
+    hostname: namenode-master
     ports:
-      - 9870:9870
-      - 50030:50030 
+      - "9870:9870"
+      - "50030:50030" 
     volumes:
       - ./data:/data
-    command: bash -c "hdfs namenode -format -force;
-                      hdfs namenode" 
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_MAPRED_HOME=/opt/hadoop
+      - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    command: bash -c "
+      hdfs namenode -format -force &&
+      hdfs namenode"
     logging:
-        driver: json-file
-        options:
-            max-size: "50m"
+      driver: json-file
+      options:
+        max-size: "50m"
 
   yarnmaster:
     build: .
+    container_name: yarnmaster
     hostname: yarnmaster
     ports:
-      - 8088:8088
-      - 19888:19888
-    links:
-      - "namenode:namenode-master"
-    command: yarn resourcemanager 
+      - "8088:8088"
+      - "19888:19888"
+    depends_on:
+      - namenode
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_MAPRED_HOME=/opt/hadoop
+      - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    command: yarn resourcemanager
 
   datanode:
     build: .
-    links:
-      - "namenode:namenode-master"
-      - "yarnmaster:yarnmaster"
-    command: bash -c "hdfs --daemon start datanode;
-                      yarn nodemanager"
-  
-  hadoop:
+    container_name: datanode
+    hostname: datanode
+    depends_on:
+      - namenode
+      - yarnmaster
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_MAPRED_HOME=/opt/hadoop
+      - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    command: bash -c "
+      hdfs --daemon start datanode &&
+      yarn nodemanager"
+
+  hadoopclient:
     build: .
+    container_name: hadoop
+    hostname: hadoop-client
+    depends_on:
+      - namenode
+      - yarnmaster
+      - datanode
     volumes:
       - ./data:/data
-    links:
-      - "namenode:namenode-master"
-      - "yarnmaster:yarnmaster"
-    command: /bin/bash 
+    command: /bin/bash
+
+
 
