@@ -32,8 +32,6 @@ services:
 
   datanode:
     build: .
-    container_name: datanode
-    hostname: datanode
     depends_on:
       - namenode
       - yarnmaster
