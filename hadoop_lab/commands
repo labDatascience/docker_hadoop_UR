@@ -7,11 +7,15 @@ docker compose up --scale datanode=3 -d datanode
 #Entrar al ejecutor de hadoop
 docker compose run hadoop
 
+# entrar a la terminal del yarn
+docker compose exec yarnmaster /bin/bash
+
 # entrar a la terminal de un nodo
 docker compose exec namenode /bin/bash
 
 # entrar a la terminal de un nodo escalado
 docker compose exec --index 2 datanode /bin/bash
+
 
 # compilar de nuevo la imagen
 docker compose build
