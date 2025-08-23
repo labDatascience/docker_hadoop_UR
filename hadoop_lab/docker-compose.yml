@@ -37,8 +37,7 @@ services:
       - yarnmaster
     command: bash -c "
       hdfs --daemon start datanode &&
-      yarn nodemanager  &
-      tail -f /dev/null"
+      yarn nodemanager"
 
   hadoopclient:
     build: .
