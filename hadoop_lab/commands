@@ -5,7 +5,7 @@ docker compose up -d
 docker compose up --scale datanode=3 -d datanode
 
 #Entrar al ejecutor de hadoop
-docker compose run hadoop
+docker compose run hadoopclient
 
 # entrar a la terminal del yarn
 docker compose exec yarnmaster /bin/bash
