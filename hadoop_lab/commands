@@ -16,9 +16,19 @@ docker compose exec --index 2 datanode /bin/bash
 # compilar de nuevo la imagen
 docker compose build
 
+# compilar de nuevo la imagen y obriga a que tenga cache 
+docker-compose build --no-cache
+
 
 # Obtener una la ip de un contenedor
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [container-id]
+
+
+# Detener todos los contenedores
+docker compose down
+
+# Detener todos los contenedores y eliminar volumenes 
+docker compose down -v
 
 
 # Detener todo
@@ -38,5 +48,5 @@ docker compose ps
 hadoop fs -mkdir /user
 hadoop fs -mkdir /user/root
 hadoop fs -mkdir input     
-hadoop fs -put /data/sherlock.txt input
+hadoop fs -put /data/input/sherlock.txt input
 python3 /data/wordcountlab1.py -r hadoop --output-dir out hdfs:///user/root/input 
